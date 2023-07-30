@@ -29,18 +29,13 @@ public class InsertCommand extends BaseCommand {
 
     @Override
     public int getArgsCount() {
-        return 3;
+        return 0;
     }
 
     @Override
     public String execute(CommandArgsArray args, Person person) {
-        try {
-            Integer.parseInt(args.getArg(0));
-        } catch (NumberFormatException e) {
-            return "Некорректные аргументы\n";
-        }
         PersonStorage storage = PersonStorage.init();
         storage.put(person);
-        return null;
+        return "";
     }
 }

@@ -1,7 +1,10 @@
 package io.github.zektorum.command;
 
+import io.github.zektorum.core.Interpreter;
 import io.github.zektorum.data.person.Person;
+import io.github.zektorum.data.person.creation.Director;
 import io.github.zektorum.data.person.creation.PersonBuilder;
+import io.github.zektorum.data.person.creation.PersonBuilderFromFile;
 import io.github.zektorum.data.person.creation.PersonBuilderFromUserInput;
 
 import java.util.Scanner;
@@ -30,12 +33,18 @@ public class InsertCommand extends BaseCommand {
 
     @Override
     public int getArgsCount() {
-        return 3;
+        return 0;
     }
 
     @Override
     public Person execute(Scanner scanner, CommandArgsArray args) {
-        PersonBuilder personBuilder = new PersonBuilderFromUserInput();
-        return null;
+        PersonBuilder personBuilder;
+        if (!Interpreter.scriptsStack.get(Interpreter.scriptsStack.size() - 1).equals("Main")) { // TODO: add method call instead of boolean expression
+            personBuilder = new PersonBuilderFromFile(Interpreter.scanner);
+        } else {
+            personBuilder = new PersonBuilderFromUserInput();
+        }
+        Director director = new Director(personBuilder);
+        return director.createPerson();
     }
 }
