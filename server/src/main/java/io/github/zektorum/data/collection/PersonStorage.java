@@ -20,7 +20,7 @@ public final class PersonStorage implements Storage<Person> {
 
     private PersonStorage() {}
 
-    public static PersonStorage init() {
+    public static PersonStorage init() { // TODO: rename to load()
         if (instance == null) {
             instance = new PersonStorage();
             instance.usedIds = new LinkedList<>();
@@ -109,31 +109,40 @@ public final class PersonStorage implements Storage<Person> {
         element.setId(id);
         collection.put(id, element);
         usedIds.add(id);
+        save();
     }
 
     @Override
-    public Person get(int id) {
+    public Person get(int id) { // FIXME: add id validation
         return collection.get(id);
     }
 
     @Override
-    public void update(int id, Person element) {
+    public void update(int id, Person element) { // FIXME: add id validation
         collection.put(id, element);
+        save();
     }
 
     @Override
-    public void remove(int id) {
+    public void remove(int id) { // FIXME: add id validation
         collection.remove(id);
+        save();
     }
 
     @Override
-    public void remove(Person element) {
+    public void remove(Person element) { // FIXME: add id validation
         collection.values().remove(element);
+        save();
     }
 
     public void info() {
         System.out.printf("Тип: %s\nДата инициализации: %s\nКоличество элементов: %s\nКоличество " +
                         "некорректных (прорущенных) элементов: %d\n",
                 collection.getClass().getName(), initializationDate, collection.size(), skippedElements);
+    }
+
+    private void save() {
+        StructuredDataSaver dataSaver = new StructuredDataSaver(collection);
+        dataSaver.save();
     }
 }

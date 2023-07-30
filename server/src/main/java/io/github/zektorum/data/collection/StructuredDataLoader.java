@@ -17,6 +17,7 @@ public class StructuredDataLoader {
             data = fileReader.read(new GsonReader());
         } catch (FileNotFoundException e) {
             System.err.printf("Ошибка! Файл %s не найден.", databaseFilename);
+            System.exit(1);
         }
     }
 
