@@ -1,5 +1,6 @@
 package io.github.zektorum.data.person.fields;
 
+import io.github.zektorum.core.Interpreter;
 import io.github.zektorum.data.person.PersonFieldsChecker;
 
 import java.util.InputMismatchException;
