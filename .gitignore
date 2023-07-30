@@ -1,0 +1,9 @@
+.idea
+backup/
+out/
+libperson/
+*/target
+*/*.json
+*/*.log
+*/*.iml
+*/dependency-reduced-pom.xml
