@@ -25,10 +25,10 @@ jobs:
       
     - name: Build server
       run: |
-        mvn package --file common-utils/pom.xml
+        mvn install --file common-utils/pom.xml
         mvn package --file server/pom.xml
       
     - name: Build client
       run: |
-        mvn package --file common-utils/pom.xml
+        mvn install --file common-utils/pom.xml
         mvn package --file client/pom.xml
