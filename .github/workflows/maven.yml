@@ -19,12 +19,12 @@ jobs:
         java-version: '8'
         distribution: 'corretto'
         cache: maven
+        
+    - name: Build common-utils
+      run: mvn package --file common-utils/pom.xml
+      
     - name: Build server
       run: mvn package --file server/pom.xml
       
     - name: Build client
       run: mvn package --file client/pom.xml
-      
-    - name: Build common-utils
-      run: mvn package --file common-utils/pom.xml
-    
