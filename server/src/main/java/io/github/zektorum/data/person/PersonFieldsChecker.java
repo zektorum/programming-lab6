@@ -99,6 +99,9 @@ public class PersonFieldsChecker implements Checkable<Person> {
     public static boolean isValidPerson(Person person) {
         int validFields = 0;
 
+        if (person == null)
+            return false;
+
         if (PersonFieldsChecker.isValidName(person.getName()))
             ++validFields;
 
