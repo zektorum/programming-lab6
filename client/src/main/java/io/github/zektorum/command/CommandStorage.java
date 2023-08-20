@@ -11,6 +11,7 @@ public abstract class CommandStorage {
         commands.put("execute_script", ExecuteScriptCommand.class);
         commands.put("show", ShowCommand.class);
         commands.put("insert", InsertCommand.class);
+        commands.put("update", UpdateCommand.class);
         // commands.put("average_of_height", AverageOfHeightCommand.class);
     }
 

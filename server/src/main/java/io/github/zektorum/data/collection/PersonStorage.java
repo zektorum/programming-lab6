@@ -47,7 +47,7 @@ public final class PersonStorage implements Storage<Person> {
                 continue;
             }
             person.setId(generateId());
-            collection.put(person.getName().hashCode(), person);
+            collection.put(person.getId(), person);
             usedIds.add(person.getId());
         }
         initializationDate = ZonedDateTime.now();
@@ -119,6 +119,7 @@ public final class PersonStorage implements Storage<Person> {
 
     @Override
     public void update(int id, Person element) { // FIXME: add id validation
+        element.setId(id);
         collection.put(id, element);
         save();
     }
