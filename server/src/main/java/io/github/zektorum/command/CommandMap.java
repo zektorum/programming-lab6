@@ -7,5 +7,8 @@ public class CommandMap {
 
     static {
         commands.put("help", HelpCommand.class);
+        commands.put("insert", InsertCommand.class);
+        commands.put("show", ShowCommand.class);
+        commands.put("update", UpdateCommand.class);
     }
 }
