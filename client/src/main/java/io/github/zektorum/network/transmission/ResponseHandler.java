@@ -1,11 +1,9 @@
 package io.github.zektorum.network.transmission;
 
 import io.github.zektorum.network.connection.DisconnectionException;
-import io.github.zektorum.network.transmission.Response;
 import io.github.zektorum.util.Deserializer;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;

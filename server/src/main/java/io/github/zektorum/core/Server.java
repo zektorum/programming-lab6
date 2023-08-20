@@ -3,8 +3,8 @@ package io.github.zektorum.core;
 import io.github.zektorum.network.transmission.Request;
 import io.github.zektorum.network.transmission.Response;
 import io.github.zektorum.util.CommandHandler;
-import io.github.zektorum.io.Deserializer;
-import io.github.zektorum.io.Serializer;
+import io.github.zektorum.util.Deserializer;
+import io.github.zektorum.util.Serializer;
 
 import java.io.IOException;
 
