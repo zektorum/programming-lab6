@@ -15,7 +15,6 @@ import java.time.ZonedDateTime;
 public class GsonWriter implements SerializableFormatWriter {
     public String createContentFromStructuredData(Person[] people) {
         return new GsonBuilder()
-                .excludeFieldsWithoutExposeAnnotation()
                 .registerTypeAdapter(ZonedDateTime.class, new TypeAdapter<ZonedDateTime>() {
                     @Override
                     public void write(JsonWriter out, ZonedDateTime value) throws IOException {
