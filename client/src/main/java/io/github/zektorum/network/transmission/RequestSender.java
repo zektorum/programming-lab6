@@ -3,7 +3,6 @@ package io.github.zektorum.network.transmission;
 import io.github.zektorum.command.BaseCommand;
 import io.github.zektorum.command.CommandArgsArray;
 import io.github.zektorum.data.person.Person;
-import io.github.zektorum.network.transmission.Request;
 import io.github.zektorum.util.Serializer;
 
 import java.io.IOException;

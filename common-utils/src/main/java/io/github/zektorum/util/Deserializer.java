@@ -6,7 +6,7 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 
 public class Deserializer {
-public Object getObj(byte[] bytes) throws ClassNotFoundException {
+    public Object getObj(byte[] bytes) throws ClassNotFoundException {
         try (ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
                 ObjectInput in = new ObjectInputStream(inputStream)) {
             return in.readObject();
