@@ -10,5 +10,6 @@ public class CommandMap {
         commands.put("insert", InsertCommand.class);
         commands.put("show", ShowCommand.class);
         commands.put("update", UpdateCommand.class);
+        commands.put("remove_key", RemoveKeyCommand.class);
     }
 }
