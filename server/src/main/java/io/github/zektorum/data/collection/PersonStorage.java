@@ -113,25 +113,31 @@ public final class PersonStorage implements Storage<Person> {
     }
 
     @Override
-    public Person get(int id) { // FIXME: add id validation
+    public Person get(int id) {
         return collection.get(id);
     }
 
     @Override
-    public void update(int id, Person element) { // FIXME: add id validation
+    public void update(int id, Person element) {
+        if (!isValidId(id))
+            return;
         element.setId(id);
         collection.put(id, element);
         save();
     }
 
     @Override
-    public void remove(int id) { // FIXME: add id validation
+    public void remove(int id) {
+        if (!isValidId(id))
+            return;
         collection.remove(id);
         save();
     }
 
     @Override
-    public void remove(Person element) { // FIXME: add id validation
+    public void remove(Person element) {
+        if (collection.get(element.getId()) == null)
+            return;
         collection.values().remove(element);
         save();
     }
