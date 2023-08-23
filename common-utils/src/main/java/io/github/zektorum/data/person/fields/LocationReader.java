@@ -1,7 +1,7 @@
 package io.github.zektorum.data.person.fields;
 
-import io.github.zektorum.core.Interpreter;
 import io.github.zektorum.data.person.PersonFieldsChecker;
+import io.github.zektorum.io.InputChecker;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * Класс, осуществляющий чтение полей объекта Location с клавиатуры либо из файла.
  */
-public class LocationReader {
+public class LocationReader implements InputChecker {
     /**
      * Метод, создающий объект локации на основе пользовательского ввода.
      *
@@ -48,7 +48,7 @@ public class LocationReader {
         System.out.print("x: ");
 
         Scanner doubleScanner = new Scanner(System.in);
-        Interpreter.checkInput(doubleScanner);
+        checkInput(doubleScanner);
         try {
             return doubleScanner.nextDouble();
         } catch (InputMismatchException e) {
@@ -59,10 +59,10 @@ public class LocationReader {
                 System.out.println("Введённое значение не входит в диапазон!");
                 System.out.printf("x ∈ [%s, %s]\n", x_MIN, x_MAX);
                 System.out.print("x: ");
-                Interpreter.checkInput(doubleScanner);
+                checkInput(doubleScanner);
                 return doubleScanner.nextDouble();
             } catch (InputMismatchException e) {
-                Interpreter.checkInput(doubleScanner);
+                checkInput(doubleScanner);
                 doubleScanner.nextLine();
             }
         }
@@ -79,12 +79,12 @@ public class LocationReader {
         System.out.print("y: ");
 
         Scanner floatScanner = new Scanner(System.in);
-        Interpreter.checkInput(floatScanner);
+        checkInput(floatScanner);
         Float y = null;
         try {
             y = floatScanner.nextFloat();
         } catch (InputMismatchException e) {
-            Interpreter.checkInput(floatScanner);
+            checkInput(floatScanner);
             floatScanner.nextLine();
         }
         while (!PersonFieldsChecker.isFieldNotNull(y)) {
@@ -92,10 +92,10 @@ public class LocationReader {
             System.out.printf("y ∈ [%s, %s]\n", y_MIN, y_MAX);
             System.out.print("Повторите попытку: ");
             try {
-                Interpreter.checkInput(floatScanner);
+                checkInput(floatScanner);
                 y = floatScanner.nextFloat();
             } catch (InputMismatchException e) {
-                Interpreter.checkInput(floatScanner);
+                checkInput(floatScanner);
                 floatScanner.nextLine();
             }
 
@@ -113,12 +113,12 @@ public class LocationReader {
         System.out.print("z: ");
 
         Scanner doubleScanner = new Scanner(System.in);
-        Interpreter.checkInput(doubleScanner);
+        checkInput(doubleScanner);
         Double z = null;
         try {
             z = doubleScanner.nextDouble();
         } catch (InputMismatchException e) {
-            Interpreter.checkInput(doubleScanner);
+            checkInput(doubleScanner);
             doubleScanner.nextLine();
         }
         while (!PersonFieldsChecker.isFieldNotNull(z)) {
@@ -126,10 +126,10 @@ public class LocationReader {
             System.out.printf("z ∈ [%s, %s]\n", z_MIN, z_MAX);
             System.out.print("Повторите попытку: ");
             try {
-                Interpreter.checkInput(doubleScanner);
+                checkInput(doubleScanner);
                 z = doubleScanner.nextDouble();
             } catch (InputMismatchException e) {
-                Interpreter.checkInput(doubleScanner);
+                checkInput(doubleScanner);
                 doubleScanner.nextLine();
             }
         }
@@ -141,7 +141,7 @@ public class LocationReader {
      * @return абсцисса локации
      */
     public double readLocationXFromFile(Scanner input) {
-        Interpreter.checkInput(input);
+        checkInput(input);
         try {
             return input.nextDouble();
         } catch (InputMismatchException e) {
@@ -154,7 +154,7 @@ public class LocationReader {
      * @return ордината локации
      */
     public Float readLocationYFromFile(Scanner input) {
-        Interpreter.checkInput(input);
+        checkInput(input);
         try {
             return input.nextFloat();
         } catch (InputMismatchException e) {
@@ -167,7 +167,7 @@ public class LocationReader {
      * @return аппликата локации
      */
     public Double readLocationZFromFile(Scanner input) {
-        Interpreter.checkInput(input);
+        checkInput(input);
         try {
             return input.nextDouble();
         } catch (InputMismatchException e) {

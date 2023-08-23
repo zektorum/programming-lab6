@@ -1,8 +1,7 @@
 package io.github.zektorum.command;
 
+import io.github.zektorum.data.collection.PersonStorage;
 import io.github.zektorum.data.person.Person;
-
-import java.util.Scanner;
 
 /**
  *  Реализация команды remove_key.
@@ -11,8 +10,6 @@ public class RemoveKeyCommand extends BaseCommand {
     private static final long serialVersionUID = 9234123499413L;
 
     public RemoveKeyCommand() {}
-
-    public RemoveKeyCommand(Scanner scanner) {}
 
     @Override
     public String getName() {
@@ -35,7 +32,20 @@ public class RemoveKeyCommand extends BaseCommand {
     }
 
     @Override
-    public Person execute(Scanner scanner, CommandArgsArray args) {
-        return null;
+    public boolean personInputRequired() {
+        return false;
+    }
+
+    @Override
+    public String execute(CommandArgsArray args, Person person) {
+        String id = args.getArg(0);
+        try {
+            Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            return "Некорректные аргументы!\n";
+        }
+        PersonStorage storage = PersonStorage.init();
+        storage.remove(Integer.parseInt(id));
+        return "";
     }
 }

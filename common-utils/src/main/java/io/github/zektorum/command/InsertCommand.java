@@ -3,14 +3,10 @@ package io.github.zektorum.command;
 import io.github.zektorum.data.collection.PersonStorage;
 import io.github.zektorum.data.person.Person;
 
-import java.util.Scanner;
-
 public class InsertCommand extends BaseCommand {
     private static final long serialVersionUID = 2234123499433L;
 
     public InsertCommand() {}
-
-    public InsertCommand(Scanner scanner) {}
 
     @Override
     public String getName() {
@@ -30,6 +26,11 @@ public class InsertCommand extends BaseCommand {
     @Override
     public int getArgsCount() {
         return 0;
+    }
+
+    @Override
+    public boolean personInputRequired() {
+        return true;
     }
 
     @Override

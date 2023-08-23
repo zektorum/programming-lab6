@@ -1,6 +1,10 @@
 package io.github.zektorum.core;
 
 import io.github.zektorum.command.*;
+import io.github.zektorum.data.person.creation.Director;
+import io.github.zektorum.data.person.creation.PersonBuilder;
+import io.github.zektorum.data.person.creation.PersonBuilderFromFile;
+import io.github.zektorum.data.person.creation.PersonBuilderFromUserInput;
 import io.github.zektorum.network.connection.ConnectionManager;
 import io.github.zektorum.network.connection.ConnectionStatus;
 import io.github.zektorum.network.connection.DisconnectionException;
@@ -68,6 +72,17 @@ public class Interpreter {
         }
     }
 
+    public Person inputPerson() {
+        PersonBuilder personBuilder;
+        if (!Interpreter.scriptsStack.get(Interpreter.scriptsStack.size() - 1).equals("Main")) { // TODO: add method call instead of boolean expression
+            personBuilder = new PersonBuilderFromFile(Interpreter.scanner);
+        } else {
+            personBuilder = new PersonBuilderFromUserInput();
+        }
+        Director director = new Director(personBuilder);
+        return director.createPerson();
+    }
+
     /**
      * Метод выводит в консоль стек вызовов скриптов.
      */
@@ -90,10 +105,13 @@ public class Interpreter {
             if (CommandStorage.containsCommand(commandName)) {
                 tokens.remove(0);
                 Class<? extends BaseCommand> currentCommand = CommandStorage.get(commandName);
-                Constructor<?> constructor = currentCommand.getConstructor(Scanner.class);
+                Constructor<?> constructor = currentCommand.getConstructor();
 
-                command = (BaseCommand) constructor.newInstance(Interpreter.scanner);
-                Person person = command.execute(Interpreter.scanner, new CommandArgsArray(command.getArgsCount(), tokens));
+                command = (BaseCommand) constructor.newInstance();
+                Person person = null;
+                if (command.personInputRequired()) {
+                    person = inputPerson();
+                }
 
                 int writeBytesCount = requestSender.sendRequest(command.getClass(),
                         new CommandArgsArray(command.getArgsCount(), tokens), person);

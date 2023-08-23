@@ -1,5 +1,7 @@
 package io.github.zektorum.data.collection;
 
+import java.util.TreeMap;
+
 public interface Storage<T> {
     void put(T element);
 
@@ -10,4 +12,6 @@ public interface Storage<T> {
     void remove(int id);
 
     void remove(T element);
+
+    // TreeMap<Integer, T> getCollection();
 }

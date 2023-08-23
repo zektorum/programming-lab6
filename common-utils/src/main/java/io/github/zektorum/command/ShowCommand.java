@@ -4,8 +4,6 @@ import io.github.zektorum.data.collection.PersonStorage;
 import io.github.zektorum.data.collection.StorageAccessOwner;
 import io.github.zektorum.data.person.Person;
 
-import java.util.Scanner;
-
 /**
  * Реализация команды show.
  */
@@ -13,8 +11,6 @@ public class ShowCommand extends StorageAccessOwner {
     private static final long serialVersionUID = 2234123499453L;
 
     public ShowCommand() {}
-
-    public ShowCommand(Scanner scanner) {}
 
     @Override
     public String execute(CommandArgsArray args, Person person) {
@@ -41,5 +37,10 @@ public class ShowCommand extends StorageAccessOwner {
     @Override
     public int getArgsCount() {
         return 0;
+    }
+
+    @Override
+    public boolean personInputRequired() {
+        return false;
     }
 }
