@@ -1,7 +1,7 @@
 package io.github.zektorum.data.person.fields;
 
-import io.github.zektorum.core.Interpreter;
 import io.github.zektorum.data.person.PersonFieldsChecker;
+import io.github.zektorum.io.InputChecker;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * Класс, содержаший методы, необходимые для чтения координат.
  */
-public class CoordinatesReader {
+public class CoordinatesReader implements InputChecker {
     /**
      * Создаёт объект координат на основе пользовательского ввода.
      *
@@ -43,12 +43,12 @@ public class CoordinatesReader {
         System.out.print("x: ");
 
         Scanner doubleScanner = new Scanner(System.in);
-        Interpreter.checkInput(doubleScanner);
+        checkInput(doubleScanner);
         double x = -200.;
         try {
             x = doubleScanner.nextDouble();
         } catch (InputMismatchException e) {
-            Interpreter.checkInput(doubleScanner);
+            checkInput(doubleScanner);
             doubleScanner.nextLine();
         }
         while (PersonFieldsChecker.isMoreThanValue(x, -183)) {
@@ -56,10 +56,10 @@ public class CoordinatesReader {
             System.out.printf("x ∈ (-183, %s]\n", x_MAX);
             System.out.print("Повторите попытку: ");
             try {
-                Interpreter.checkInput(doubleScanner);
+                checkInput(doubleScanner);
                 x = doubleScanner.nextDouble();
             } catch (InputMismatchException e) {
-                Interpreter.checkInput(doubleScanner);
+                checkInput(doubleScanner);
                 doubleScanner.nextLine();
             }
         }
@@ -75,12 +75,12 @@ public class CoordinatesReader {
         System.out.print("y: ");
 
         Scanner intScanner = new Scanner(System.in);
-        Interpreter.checkInput(intScanner);
+        checkInput(intScanner);
         Integer y = 1000;
         try {
             y = intScanner.nextInt();
         } catch (InputMismatchException e) {
-            Interpreter.checkInput(intScanner);
+            checkInput(intScanner);
             intScanner.nextLine();
         }
         while (!PersonFieldsChecker.isLessThanValue(y, 750)) {
@@ -88,10 +88,10 @@ public class CoordinatesReader {
             System.out.printf("y ∈ [%s, 750)\n", y_MIN);
             System.out.print("Повторите попытку: ");
             try {
-                Interpreter.checkInput(intScanner);
+                checkInput(intScanner);
                 y = intScanner.nextInt();
             } catch (InputMismatchException e) {
-                Interpreter.checkInput(intScanner);
+                checkInput(intScanner);
                 intScanner.nextLine();
             }
         }
@@ -103,7 +103,7 @@ public class CoordinatesReader {
      * @return абсцисса координат
      */
     private double readCoordinateXFromFile(Scanner input) {
-        Interpreter.checkInput(input);
+        checkInput(input);
         try {
             return input.nextDouble();
         } catch (InputMismatchException e) {
@@ -115,7 +115,7 @@ public class CoordinatesReader {
      * @return ордината координат
      */
     private Integer readCoordinateYFromFile(Scanner input) {
-        Interpreter.checkInput(input);
+        checkInput(input);
         try {
             return input.nextInt();
         } catch (InputMismatchException e) {

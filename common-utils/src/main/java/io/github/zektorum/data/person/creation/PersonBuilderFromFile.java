@@ -1,9 +1,9 @@
 package io.github.zektorum.data.person.creation;
 
-import io.github.zektorum.core.Interpreter;
 import io.github.zektorum.data.person.Person;
 import io.github.zektorum.data.person.PersonFieldsChecker;
 import io.github.zektorum.data.person.fields.*;
+import io.github.zektorum.io.InputChecker;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 /**
  * Схема создания объекта Person на основе данных из файла.
  */
-public class PersonBuilderFromFile implements PersonBuilder {
+public class PersonBuilderFromFile implements PersonBuilder, InputChecker {
     final private Scanner input;
     private String name;
     private Coordinates coordinates;
@@ -26,7 +26,7 @@ public class PersonBuilderFromFile implements PersonBuilder {
     }
 
     public PersonBuilder withName() {
-        Interpreter.checkInput(this.input);
+        checkInput(this.input);
         String name = this.input.nextLine();
         if (name.equals("")) {
             this.name =  null;
@@ -37,7 +37,7 @@ public class PersonBuilderFromFile implements PersonBuilder {
     }
 
     public PersonBuilder withCoordinates() {
-        Interpreter.checkInput(this.input);
+        checkInput(this.input);
         CoordinatesReader coordinatesReader = new CoordinatesReader();
         this.coordinates = coordinatesReader.readFromFile(this.input);
         return this;
@@ -45,7 +45,7 @@ public class PersonBuilderFromFile implements PersonBuilder {
 
     public PersonBuilder withHeight() {
         try {
-            Interpreter.checkInput(this.input);
+            checkInput(this.input);
             this.height = this.input.nextInt();
         } catch (InputMismatchException e) {
             this.height = -1;
@@ -53,7 +53,7 @@ public class PersonBuilderFromFile implements PersonBuilder {
         return this;
     }
     public PersonBuilder withEyeColor() {
-        Interpreter.checkInput(this.input);
+        checkInput(this.input);
         String eyeColor = this.input.next().toUpperCase();
         try {
             this.eyeColor = Color.EyeColor.valueOf(eyeColor);
@@ -64,7 +64,7 @@ public class PersonBuilderFromFile implements PersonBuilder {
     }
 
     public PersonBuilder withHairColor() {
-        Interpreter.checkInput(this.input);
+        checkInput(this.input);
         String hairColor = this.input.next().toUpperCase();
         try {
             this.hairColor = Color.HairColor.valueOf(hairColor);
@@ -75,7 +75,7 @@ public class PersonBuilderFromFile implements PersonBuilder {
     }
 
     public PersonBuilder withNationality() {
-        Interpreter.checkInput(this.input);
+        checkInput(this.input);
         String nationality = this.input.next().toUpperCase();
         try {
             this.nationality = Country.valueOf(nationality);
@@ -86,7 +86,7 @@ public class PersonBuilderFromFile implements PersonBuilder {
     }
 
     public PersonBuilder withLocation() {
-        Interpreter.checkInput(this.input);
+        checkInput(this.input);
         LocationReader locationReader = new LocationReader();
         this.location = locationReader.readFromFile(this.input);
         return this;

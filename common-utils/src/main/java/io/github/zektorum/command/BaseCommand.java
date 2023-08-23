@@ -1,25 +1,13 @@
 package io.github.zektorum.command;
 
 import java.io.Serializable;
-import java.util.Scanner;
 
 /**
  * Родительский класс для всех команд.
  */
 public abstract class BaseCommand implements Command, Serializable {
-    private final Scanner scanner;
 
-    public BaseCommand() {
-        this.scanner = null;
-    }
-
-    public BaseCommand(Scanner scanner) {
-        this.scanner = scanner;
-    }
-
-    public Scanner getScanner() {
-        return scanner;
-    }
+    public BaseCommand() {}
 
     /**
      * Возвращает имя команды.
@@ -45,10 +33,7 @@ public abstract class BaseCommand implements Command, Serializable {
      */
     public abstract String getDescription();
 
-    /**
-     * Возвращает количество аргументов команды.
-     *
-     * @return количество аргументов
-     */
     public abstract int getArgsCount();
+
+    public abstract boolean personInputRequired();
 }

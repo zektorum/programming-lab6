@@ -2,8 +2,6 @@ package io.github.zektorum.command;
 
 import io.github.zektorum.data.person.Person;
 
-import java.util.Scanner;
-
 /**
  * Реализация команды average_of_height.
  */
@@ -11,10 +9,6 @@ public class AverageOfHeightCommand extends BaseCommand {
     private static final long serialVersionUID = 1234123499413L;
 
     public AverageOfHeightCommand() {}
-
-    public AverageOfHeightCommand(Scanner scanner) {
-        super(scanner);
-    }
 
     @Override
     public String getName() {
@@ -34,6 +28,11 @@ public class AverageOfHeightCommand extends BaseCommand {
     @Override
     public int getArgsCount() {
         return 0;
+    }
+
+    @Override
+    public boolean personInputRequired() {
+        return false;
     }
 
     @Override

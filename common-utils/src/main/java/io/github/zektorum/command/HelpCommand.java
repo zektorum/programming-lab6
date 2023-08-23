@@ -3,7 +3,6 @@ package io.github.zektorum.command;
 import io.github.zektorum.data.person.Person;
 
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * Реализация команды help.
@@ -12,10 +11,6 @@ public class HelpCommand extends BaseCommand {
     private static final long serialVersionUID = 1234123499453L;
 
     public HelpCommand() {}
-
-    public HelpCommand(Scanner scanner) {
-        super(scanner);
-    }
 
    public String execute(CommandArgsArray args, Person person) {
        StringBuilder stringBuilder = new StringBuilder();
@@ -53,5 +48,10 @@ public class HelpCommand extends BaseCommand {
     @Override
     public int getArgsCount() {
         return 0;
+    }
+
+    @Override
+    public boolean personInputRequired() {
+        return false;
     }
 }

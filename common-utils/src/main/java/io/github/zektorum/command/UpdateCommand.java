@@ -3,35 +3,34 @@ package io.github.zektorum.command;
 import io.github.zektorum.data.collection.PersonStorage;
 import io.github.zektorum.data.person.Person;
 
-import java.util.Scanner;
+public class UpdateCommand extends BaseCommand {
+    private static final long serialVersionUID = 9234123499433L;
 
-/**
- *  Реализация команды remove_key.
- */
-public class RemoveKeyCommand extends BaseCommand {
-    private static final long serialVersionUID = 9234123499413L;
-
-    public RemoveKeyCommand() {}
-    public RemoveKeyCommand(Scanner scanner) {}
+    public UpdateCommand() {}
 
     @Override
     public String getName() {
-        return "remove_key";
+        return "update";
     }
 
     @Override
     public String getUsage() {
-        return "remove_key key";
+        return "update id {element}";
     }
 
     @Override
     public String getDescription() {
-        return "удалить элемент из коллекции по его ключу";
+        return "обновить значение элемента коллекции, id которого равен заданному";
     }
 
     @Override
     public int getArgsCount() {
         return 1;
+    }
+
+    @Override
+    public boolean personInputRequired() {
+        return true;
     }
 
     @Override
@@ -43,7 +42,7 @@ public class RemoveKeyCommand extends BaseCommand {
             return "Некорректные аргументы!\n";
         }
         PersonStorage storage = PersonStorage.init();
-        storage.remove(Integer.parseInt(id));
+        storage.update(Integer.parseInt(id), person);
         return "";
     }
 }

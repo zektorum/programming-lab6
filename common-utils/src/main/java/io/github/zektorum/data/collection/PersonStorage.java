@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Stream;
 import java.util.TreeMap;
 
-public final class PersonStorage extends ObjectStorage {
+public final class PersonStorage implements Storage<Person> {
     private static PersonStorage instance;
     private StructuredDataLoader dataLoader;
     private TreeMap<Integer, Person> collection;
@@ -70,6 +70,7 @@ public final class PersonStorage extends ObjectStorage {
         }
         return true;
     }
+
     TreeMap<Integer, Person> getCollection() {
         return collection;
     }

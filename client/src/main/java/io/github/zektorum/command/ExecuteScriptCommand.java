@@ -5,32 +5,31 @@ import io.github.zektorum.data.person.Person;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Реализация команды execute_script.
  */
 public class ExecuteScriptCommand extends BaseCommand {
-    public ExecuteScriptCommand(Scanner scanner) {}
+    public ExecuteScriptCommand() {}
 
-    public Person execute(Scanner scanner, CommandArgsArray args) {
+    public String execute(CommandArgsArray args, Person person) {
         String filename;
         if ((filename = args.getArg(0)) == null){
             System.out.println("Ошибка! Некорректно задан аргумент\n");
-            return null;
+            return "";
         }
 
         if (!(new File(filename).exists())) {
             System.out.println("Некорректное имя! Файл не существует\n");
-            return null;
+            return "";
         }
         if (!new File(filename).canRead()) {
             System.out.println("Отсутствуют права на чтение!\n");
-            return null;
+            return "";
         }
         if (Interpreter.scriptsStack.contains(filename)) {
             System.out.println("Ошибка! Попытка циклического запуска скрипта\n");
-            return null;
+            return "";
         }
         try {
             Interpreter interpreter = new Interpreter(filename);
@@ -38,7 +37,7 @@ public class ExecuteScriptCommand extends BaseCommand {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
     }
 
     @Override
@@ -60,5 +59,10 @@ public class ExecuteScriptCommand extends BaseCommand {
     @Override
     public int getArgsCount() {
         return 1;
+    }
+
+    @Override
+    public boolean personInputRequired() {
+        return false;
     }
 }
