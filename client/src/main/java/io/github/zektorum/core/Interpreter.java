@@ -97,6 +97,7 @@ public class Interpreter {
         RequestSender requestSender = new RequestSender(channel);
         ResponseHandler responseHandler = new ResponseHandler(channel);
         BaseCommand command;
+        CommandArgsArray args;
         try {
             if (commandName.equals("exit")) {
                 System.out.println("Завершение работы...");
@@ -108,15 +109,20 @@ public class Interpreter {
                 Constructor<?> constructor = currentCommand.getConstructor();
 
                 command = (BaseCommand) constructor.newInstance();
+                args = new CommandArgsArray(command.getArgsCount(), tokens);
                 Person person = null;
                 if (command.personInputRequired()) {
                     person = inputPerson();
                 }
 
-                int writeBytesCount = requestSender.sendRequest(command.getClass(),
-                        new CommandArgsArray(command.getArgsCount(), tokens), person);
-                if (writeBytesCount > 0) {
-                    responseHandler.readResponse();
+                if (command instanceof ExecuteScriptCommand) {
+                    command.execute(args, person);
+                } else {
+
+                    int writeBytesCount = requestSender.sendRequest(command.getClass(), args, person);
+                    if (writeBytesCount > 0) {
+                        responseHandler.readResponse();
+                    }
                 }
             } else {
                 System.out.println("Команда не существует! Введите корректное название");
