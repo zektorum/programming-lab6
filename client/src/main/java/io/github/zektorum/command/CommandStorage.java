@@ -14,7 +14,7 @@ public abstract class CommandStorage {
         commands.put("update", UpdateCommand.class);
         commands.put("remove_key", RemoveKeyCommand.class);
         commands.put("remove_lower", RemoveLowerCommand.class);
-        // commands.put("average_of_height", AverageOfHeightCommand.class);
+        commands.put("average_of_height", AverageOfHeightCommand.class);
     }
 
     public static Class<? extends BaseCommand> get(String command) {

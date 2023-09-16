@@ -1,6 +1,10 @@
 package io.github.zektorum.command;
 
+import io.github.zektorum.data.collection.PersonStorage;
 import io.github.zektorum.data.person.Person;
+
+import java.util.DoubleSummaryStatistics;
+import java.util.stream.Collectors;
 
 /**
  * Реализация команды average_of_height.
@@ -37,10 +41,9 @@ public class AverageOfHeightCommand extends BaseCommand {
 
     @Override
     public String execute(CommandArgsArray args, Person person) {
-        if (args.getCount() != 0) {
-            return "Некорректные аргументы!";
-        }
-        // return String.format("%.4f\n", peopleCollection.averageOfHeight());
-        return null;
+        PersonStorage storage = PersonStorage.init();
+        DoubleSummaryStatistics stats = storage.stream()
+                .collect(Collectors.summarizingDouble(Person::getHeight));
+        return String.format("%.2f\n", stats.getAverage());
     }
 }
