@@ -55,4 +55,9 @@ public class Location implements Comparable<Location>, Serializable {
     public Double getZ() {
         return this.z;
     }
+
+    @Override
+    public String toString() {
+        return String.format("(%.2f, %.2f, %.2f)", this.x, this.y, this.z);
+    }
 }
