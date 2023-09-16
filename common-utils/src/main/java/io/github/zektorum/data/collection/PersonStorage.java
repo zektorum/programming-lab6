@@ -75,6 +75,10 @@ public final class PersonStorage implements Storage<Person> {
         return collection;
     }
 
+    void setCollection(TreeMap<Integer, Person> collection) {
+        this.collection = collection;
+    }
+
     public String getElementInfo(Integer key, Person person) {
         String format;
         if (person.getLocation() != null) {
