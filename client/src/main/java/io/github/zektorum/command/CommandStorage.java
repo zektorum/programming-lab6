@@ -17,6 +17,7 @@ public abstract class CommandStorage {
         commands.put("average_of_height", AverageOfHeightCommand.class);
         commands.put("replace_if_lower", ReplaceIfLowerCommand.class);
         commands.put("print_field_ascending_location", PrintFieldAscendingLocationCommand.class);
+        commands.put("count_greater_than_eye_color", CountGreaterThanEyeColorCommand.class);
     }
 
     public static Class<? extends BaseCommand> get(String command) {
