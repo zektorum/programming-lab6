@@ -12,5 +12,6 @@ public class CommandMap {
         commands.put("update", UpdateCommand.class);
         commands.put("remove_key", RemoveKeyCommand.class);
         commands.put("average_of_height", AverageOfHeightCommand.class);
+        commands.put("replace_if_lower", ReplaceIfLowerCommand.class);
     }
 }
