@@ -13,5 +13,6 @@ public class CommandMap {
         commands.put("remove_key", RemoveKeyCommand.class);
         commands.put("average_of_height", AverageOfHeightCommand.class);
         commands.put("replace_if_lower", ReplaceIfLowerCommand.class);
+        commands.put("print_field_ascending_location", PrintFieldAscendingLocationCommand.class);
     }
 }
