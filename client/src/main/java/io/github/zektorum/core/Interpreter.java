@@ -104,7 +104,6 @@ public class Interpreter {
                 System.exit(0);
             }
             if (CommandStorage.containsCommand(commandName)) {
-                tokens.remove(0);
                 Class<? extends BaseCommand> currentCommand = CommandStorage.get(commandName);
                 Constructor<?> constructor = currentCommand.getConstructor();
 
@@ -144,6 +143,7 @@ public class Interpreter {
             System.out.println("Подключение с сервером разорвано.");
             this.connectionManager.setConnectionStatus(ConnectionStatus.DOWN);
             this.connectionManager.retryConnection();
+            this.executeCommand(commandName, tokens);
         }
     }
 
@@ -214,6 +214,7 @@ public class Interpreter {
                     continue;
                 }
 
+                tokens.remove(0);
                 executeCommand(command, tokens);
                 tokens.clear();
 
