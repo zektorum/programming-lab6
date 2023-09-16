@@ -8,7 +8,11 @@ import java.util.TreeMap;
 public abstract class StorageAccessOwner extends BaseCommand {
     public StorageAccessOwner() {}
 
-    TreeMap<Integer, Person> collection(PersonStorage storage) {
+    protected TreeMap<Integer, Person> collection(PersonStorage storage) {
         return storage.getCollection();
+    }
+
+    protected void setCollection(PersonStorage storage, TreeMap<Integer, Person> collection) {
+        storage.setCollection(collection);
     }
 }
