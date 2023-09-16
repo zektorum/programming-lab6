@@ -18,6 +18,7 @@ public abstract class CommandStorage {
         commands.put("replace_if_lower", ReplaceIfLowerCommand.class);
         commands.put("print_field_ascending_location", PrintFieldAscendingLocationCommand.class);
         commands.put("count_greater_than_eye_color", CountGreaterThanEyeColorCommand.class);
+        commands.put("remove_lower_key", RemoveLowerKeyCommand.class);
     }
 
     public static Class<? extends BaseCommand> get(String command) {
