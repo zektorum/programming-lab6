@@ -146,8 +146,8 @@ public final class PersonStorage implements Storage<Person> {
         save();
     }
 
-    public void info() {
-        System.out.printf("Тип: %s\nДата инициализации: %s\nКоличество элементов: %s\nКоличество " +
+    public String info() {
+        return String.format("Тип: %s\nДата инициализации: %s\nКоличество элементов: %s\nКоличество " +
                         "некорректных (прорущенных) элементов: %d\n",
                 collection.getClass().getName(), initializationDate, collection.size(), skippedElements);
     }
