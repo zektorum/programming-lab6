@@ -43,4 +43,9 @@ public class ShowCommand extends StorageAccessOwner {
     public boolean personInputRequired() {
         return false;
     }
+
+    @Override
+    public boolean validate(CommandArgsArray args) {
+        return true;
+    }
 }

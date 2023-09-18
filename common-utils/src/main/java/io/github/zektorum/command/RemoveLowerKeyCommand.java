@@ -36,6 +36,11 @@ public class RemoveLowerKeyCommand extends StorageAccessOwner {
     }
 
     @Override
+    public boolean validate(CommandArgsArray args) {
+        return true;
+    }
+
+    @Override
     public String execute(CommandArgsArray args, Person person) {
         PersonStorage storage = PersonStorage.init();
         int id = Integer.parseInt(args.getArg(0));

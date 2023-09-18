@@ -8,7 +8,6 @@ import java.io.Serializable;
 public abstract class BaseCommand implements Command, Serializable {
 
     public BaseCommand() {}
-
     /**
      * Возвращает имя команды.
      *
@@ -36,4 +35,6 @@ public abstract class BaseCommand implements Command, Serializable {
     public abstract int getArgsCount();
 
     public abstract boolean personInputRequired();
+
+    public abstract boolean validate(CommandArgsArray args);
 }

@@ -1,5 +1,6 @@
 package io.github.zektorum.command;
 
+import io.github.zektorum.command.validation.UpdateCommandArgsValidator;
 import io.github.zektorum.data.collection.PersonStorage;
 import io.github.zektorum.data.person.Person;
 
@@ -34,14 +35,15 @@ public class UpdateCommand extends BaseCommand {
     }
 
     @Override
+    public boolean validate(CommandArgsArray args) {
+        UpdateCommandArgsValidator validator = new UpdateCommandArgsValidator(args);
+        return validator.validateGroup();
+    }
+
+    @Override
     public String execute(CommandArgsArray args, Person person) {
-        String id = args.getArg(0);
-        try {
-            Integer.parseInt(id);
-        } catch (NumberFormatException e) {
-            return "Некорректные аргументы!\n";
-        }
         PersonStorage storage = PersonStorage.init();
+        String id = args.getArg(0);
         storage.update(Integer.parseInt(id), person);
         return "";
     }
