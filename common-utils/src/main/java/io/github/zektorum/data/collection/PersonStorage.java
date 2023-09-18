@@ -107,6 +107,7 @@ public final class PersonStorage implements Storage<Person> {
     public Stream<Person> stream() {
         return collection.values().stream();
     }
+
     @Override
     public void put(Person element) {
         int id = generateId();
@@ -148,7 +149,7 @@ public final class PersonStorage implements Storage<Person> {
 
     public String info() {
         return String.format("Тип: %s\nДата инициализации: %s\nКоличество элементов: %s\nКоличество " +
-                        "некорректных (прорущенных) элементов: %d\n",
+                        "некорректных (пропущенных) элементов: %d\n",
                 collection.getClass().getName(), initializationDate, collection.size(), skippedElements);
     }
 
