@@ -1,5 +1,6 @@
 package io.github.zektorum.command;
 
+import io.github.zektorum.command.validation.RemoveKeyCommandArgsValidator;
 import io.github.zektorum.data.collection.PersonStorage;
 import io.github.zektorum.data.person.Person;
 
@@ -38,7 +39,8 @@ public class RemoveKeyCommand extends BaseCommand {
 
     @Override
     public boolean validate(CommandArgsArray args) {
-        return true;
+        RemoveKeyCommandArgsValidator validator = new RemoveKeyCommandArgsValidator(args);
+        return validator.validateGroup();
     }
 
     @Override
