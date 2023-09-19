@@ -6,6 +6,7 @@ import io.github.zektorum.util.CommandHandler;
 import io.github.zektorum.util.Deserializer;
 import io.github.zektorum.util.Serializer;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import java.net.InetSocketAddress;
@@ -42,9 +43,9 @@ public class Server {
         }
     }
 
-    public void sendResponse(SocketChannel channel, byte[] response) {
+    public void sendResponse(SocketChannel channel, ByteArrayOutputStream response) {
         try {
-            ByteBuffer buffer = ByteBuffer.wrap(response);
+            ByteBuffer buffer = ByteBuffer.wrap(response.toByteArray());
             channel.write(buffer);
         } catch (IOException e ) {
             e.printStackTrace();
@@ -114,7 +115,9 @@ public class Server {
                                 CommandHandler handler = new CommandHandler();
                                 responseMessage = handler.processRequest(request);
                                 System.out.printf("Response message: \"%s\"\n", responseMessage);
-                                byte[] bytes = serializer.serialize(new Response(responseMessage));
+
+                                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                                bytes.write(serializer.serialize(new Response(responseMessage)));
                                 this.sendResponse(selectableChannel, bytes);
                             }
                         }
