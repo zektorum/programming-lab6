@@ -33,6 +33,11 @@ public class PrintFieldAscendingLocationCommand extends BaseCommand {
     }
 
     @Override
+    public boolean validate(CommandArgsArray args) {
+        return true;
+    }
+
+    @Override
     public String execute(CommandArgsArray args, Person person) {
         PersonStorage storage = PersonStorage.init();
         return storage.stream()

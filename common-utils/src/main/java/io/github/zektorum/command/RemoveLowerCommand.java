@@ -42,6 +42,11 @@ public class RemoveLowerCommand extends StorageAccessOwner {
     }
 
     @Override
+    public boolean validate(CommandArgsArray args) {
+        return true;
+    }
+
+    @Override
     public String execute(CommandArgsArray args, Person person) {
         PersonStorage storage = PersonStorage.init();
         TreeMap<Integer, Person> result = storage.stream()

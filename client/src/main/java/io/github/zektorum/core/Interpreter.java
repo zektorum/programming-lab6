@@ -109,6 +109,10 @@ public class Interpreter {
 
                 command = (BaseCommand) constructor.newInstance();
                 args = new CommandArgsArray(command.getArgsCount(), tokens);
+                if (!command.validate(args)) {
+                    System.out.println("Некорректные аргументы команды!");
+                    return;
+                }
                 Person person = null;
                 if (command.personInputRequired()) {
                     person = inputPerson();
@@ -131,9 +135,8 @@ public class Interpreter {
             e.printStackTrace();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             System.err.println("Ошибка создания отправляемой команды.");
-        } catch (NumberFormatException | WrongArgumentsException e) {
-            System.err.println("Ошибка! Неверно введены аргументы.\n");
-            e.printStackTrace();
+        } catch (WrongArgumentsException e) { // FIXME: убрал NumberFormatException
+            System.out.println("Ошибка! Неверное число аргументов.");
         } catch (ConnectException e) {
             e.printStackTrace();
         } catch (IOException e) {

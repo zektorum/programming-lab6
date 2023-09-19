@@ -65,4 +65,9 @@ public class ExecuteScriptCommand extends BaseCommand {
     public boolean personInputRequired() {
         return false;
     }
+
+    @Override
+    public boolean validate(CommandArgsArray args) {
+        return true;
+    }
 }

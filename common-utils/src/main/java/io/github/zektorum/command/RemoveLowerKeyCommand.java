@@ -1,5 +1,6 @@
 package io.github.zektorum.command;
 
+import io.github.zektorum.command.validation.RemoveLowerKeyCommandArgsValidator;
 import io.github.zektorum.data.collection.PersonStorage;
 import io.github.zektorum.data.collection.StorageAccessOwner;
 import io.github.zektorum.data.person.Person;
@@ -33,6 +34,12 @@ public class RemoveLowerKeyCommand extends StorageAccessOwner {
     @Override
     public boolean personInputRequired() {
         return false;
+    }
+
+    @Override
+    public boolean validate(CommandArgsArray args) {
+        RemoveLowerKeyCommandArgsValidator validator = new RemoveLowerKeyCommandArgsValidator(args);
+        return validator.validateGroup();
     }
 
     @Override
