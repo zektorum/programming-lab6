@@ -110,7 +110,10 @@ public final class PersonStorage implements Storage<Person> {
 
     @Override
     public void put(Person element) {
-        int id = generateId();
+        put(generateId(), element);
+    }
+
+    public void put(int id, Person element) {
         element.setId(id);
         collection.put(id, element);
         usedIds.add(id);
