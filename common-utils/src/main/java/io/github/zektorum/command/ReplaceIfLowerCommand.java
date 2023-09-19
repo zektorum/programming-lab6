@@ -1,5 +1,6 @@
 package io.github.zektorum.command;
 
+import io.github.zektorum.command.validation.ReplaceIfLowerCommandArgsValidator;
 import io.github.zektorum.data.collection.PersonStorage;
 import io.github.zektorum.data.collection.StorageAccessOwner;
 import io.github.zektorum.data.person.Person;
@@ -33,7 +34,8 @@ public class ReplaceIfLowerCommand extends StorageAccessOwner {
 
     @Override
     public boolean validate(CommandArgsArray args) {
-        return true;
+        ReplaceIfLowerCommandArgsValidator validator = new ReplaceIfLowerCommandArgsValidator(args);
+        return validator.validateGroup();
     }
 
     @Override
