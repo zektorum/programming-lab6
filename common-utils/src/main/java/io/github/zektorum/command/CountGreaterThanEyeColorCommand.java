@@ -1,5 +1,6 @@
 package io.github.zektorum.command;
 
+import io.github.zektorum.command.validation.CountGreaterThanEyeColorCommandArgsValidator;
 import io.github.zektorum.data.collection.PersonStorage;
 import io.github.zektorum.data.person.Person;
 import io.github.zektorum.data.person.fields.Color;
@@ -32,7 +33,8 @@ public class CountGreaterThanEyeColorCommand extends BaseCommand {
 
     @Override
     public boolean validate(CommandArgsArray args) {
-        return true;
+        CountGreaterThanEyeColorCommandArgsValidator validator = new CountGreaterThanEyeColorCommandArgsValidator(args);
+        return validator.validateGroup();
     }
 
     @Override
