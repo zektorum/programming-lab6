@@ -1,5 +1,6 @@
 package io.github.zektorum.command;
 
+import io.github.zektorum.command.validation.InsertCommandArgsValidator;
 import io.github.zektorum.data.collection.PersonStorage;
 import io.github.zektorum.data.person.Person;
 
@@ -25,7 +26,7 @@ public class InsertCommand extends BaseCommand {
 
     @Override
     public int getArgsCount() {
-        return 0;
+        return 1;
     }
 
     @Override
@@ -35,13 +36,15 @@ public class InsertCommand extends BaseCommand {
 
     @Override
     public boolean validate(CommandArgsArray args) {
-        return true;
+        InsertCommandArgsValidator validator = new InsertCommandArgsValidator(args);
+        return validator.validateGroup();
     }
 
     @Override
     public String execute(CommandArgsArray args, Person person) {
         PersonStorage storage = PersonStorage.init();
-        storage.put(person);
+        String id = args.getArg(0);
+        storage.put(Integer.parseInt(id), person);
         return "";
     }
 }
